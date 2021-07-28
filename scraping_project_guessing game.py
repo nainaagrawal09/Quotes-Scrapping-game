@@ -6,7 +6,8 @@ import random
 quotes_list=[]
 n_url = "/page/1"
 url = "http://quotes.toscrape.com"
-while n_url:
+k=1
+while n_url and k<5:
     response= requests.get(f"{url}{n_url}")
     soup=BeautifulSoup(response.text,"html.parser")
     quotes=soup.select(".quote")
@@ -18,6 +19,7 @@ while n_url:
         quotes_list.append([q,name,about_url])
     next_btn=soup.find(class_="next")
     n_url=next_btn.find("a")["href"] if next_btn else None
+    k+=1
 
 
 
